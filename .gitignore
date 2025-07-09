@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+
+# ChromaDB local data
+chroma_db/
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Node
+node_modules/
+
+# PDF and helper files (optional, if you want to keep them out of the repo)
+# helper-files/
+
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Jupyter and IPython
+.ipynb_checkpoints/
+*.ipynb
+
+# System files
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Test and coverage
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache/
+pytest_cache/
+
+# Misc
+*.swp
+*.swo
+
+# Docs build
+/docs/_build/

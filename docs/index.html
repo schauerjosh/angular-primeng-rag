@@ -1,0 +1,27 @@
+<!--
+  This is a static version of the chat UI for GitHub Pages. Backend features (search, LLM) are disabled.
+  To use the full app, run the Flask backend locally or deploy to a Python host.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular/PrimeNG RAG Chat (Static Demo)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-history" id="chat-history">
+      <div class="message bot">
+        <div class="avatar">🤖</div>
+        <div class="content">Welcome! This is a static demo. Backend Q&A is disabled on GitHub Pages.<br>To use the full Retrieval-Augmented Generation (RAG) system, run the Flask backend locally.</div>
+      </div>
+    </div>
+    <form class="chat-input" onsubmit="return false;">
+      <input type="text" placeholder="Type your question... (demo only)" disabled>
+      <button type="submit" disabled>Send</button>
+    </form>
+  </div>
+</body>
+</html>

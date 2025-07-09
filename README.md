@@ -1,123 +1,117 @@
-# Spot Access Helper
+# Angular PrimeNG RAG System
 
-Spot Access Helper is a Retrieval-Augmented Generation (RAG) system designed to provide intelligent query responses using OpenAI embeddings and Chroma as the vector database. It features a modern web interface built with Flask.
+A Retrieval-Augmented Generation (RAG) system for answering Angular and PrimeNG migration/upgrade questions. Features a modern chat UI, Python/Flask backend, ChromaDB vector store, and OpenAI integration.
+
+---
 
 ## Features
-- File ingestion and parsing.
-- Embedding generation and storage in ChromaDB.
-- Query and retrieval logic with filtering and pagination.
-- Mocked LLM responses for intelligent answers.
-- Modern, minimalistic web interface.
+- **Modern Chat UI**: Beautiful, dark, flowing, and responsive chat interface.
+- **Python/Flask Backend**: Handles queries, document ingestion, and OpenAI LLM calls.
+- **ChromaDB Vector Store**: Fast, persistent semantic search over migration/upgrade docs.
+- **OpenAI Embeddings**: Uses `text-embedding-ada-002` for chunk/document similarity.
+- **PDF/Doc Ingestion**: Easily add new migration guides to `helper-files/`.
 
-## Prerequisites
-1. **Python**: Ensure Python 3.8 or later is installed.
-2. **Dependencies**: Install required Python packages.
-3. **OpenAI API Key**: Obtain an API key from OpenAI (optional for real embeddings).
+---
 
-## Installation
+## Quickstart
 
-### Step 1: Clone the Repository
+### 1. Prerequisites
+- Python 3.9+
+- Node.js (for static asset development, optional)
+- OpenAI API Key (get from https://platform.openai.com/)
+
+### 2. Clone the Repo
 ```bash
-git clone <repository-url>
-cd spot-access-helper
+git clone https://github.com/schauerjosh/angular-primeng-rag.git
+cd angular-primeng-rag
 ```
 
-### Step 2: Set Up Python Environment
-Create a virtual environment and activate it:
+### 3. Set Up Environment
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-Install the required Python packages:
-```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+export OPENAI_API_KEY=sk-...
 ```
 
-### Step 4: Configure the Application
-Edit the `config.py` file to set up your environment variables, including the OpenAI API key (if available).
+### 4. Ingest Documents
+Put your migration/upgrade PDFs in `helper-files/`.
+```bash
+python src/main.py
+```
 
-## Running the Application
-
-### Step 1: Start the Flask Server
-Run the following command to start the Flask server:
+### 5. Run the App
 ```bash
 python src/app.py
 ```
+Visit [http://localhost:5003](http://localhost:5003)
 
-### Step 2: Access the Web Interface
-Open your browser and navigate to:
-```
-http://127.0.0.1:5000
-```
+---
 
-## File Structure
+## Project Structure
 ```
-spot-access-helper/
-├── src/
-│   ├── config.py
-│   ├── file_parser.py
-│   ├── embedding.py
-│   ├── vector_store.py
-│   ├── main.py
-│   ├── query_retrieval.py
-│   ├── llm.py
-│   ├── app.py
-├── templates/
-│   ├── index.html
-├── static/
-│   ├── styles.css
-│   ├── script.js
-├── tests/
-│   ├── test_file_parser.py
-│   ├── test_query_retrieval.py
-│   ├── test_retrieval_accuracy.py
-│   ├── test_performance.py
-│   ├── test_app.py
-│   ├── test_advanced_query.py
-├── requirements.txt
+.
+├── src/                # Python backend
+│   ├── app.py           # Flask app
+│   ├── main.py          # Ingestion script
+│   ├── ...
+├── static/            # JS/CSS assets
+├── templates/          # HTML templates
+├── helper-files/       # Migration/upgrade PDFs
+├── tests/              # Unit tests
+├── requirements.txt    # Python dependencies
+├── .gitignore
 ├── README.md
+├── docs/               # Static UI for GitHub Pages
 ```
 
-## Development Workflow
+---
 
-### Step 1: Run Tests
-Use `pytest` to run all tests:
-```bash
-pytest
-```
+## Debugging & Development
+- **Logs**: All major steps print debug info to the console.
+- **ChromaDB**: Data is stored in `chroma_db/` (ignored by git).
+- **API Key**: Never commit your OpenAI key. Use environment variables only.
+- **Static UI**: Edit `static/styles.css` and `static/script.js` for UI tweaks.
+- **Backend**: Edit `src/` Python files for logic changes.
+- **Unit Tests**: Place tests in `tests/` and run with `pytest`.
 
-### Step 2: Debugging
-Check logs and errors in the terminal to debug issues.
-
-### Step 3: Modify Code
-Edit files in the `src/` directory to add or update features.
+---
 
 ## Deployment
+### Flask App (Recommended)
+- Deploy to [Render](https://render.com/), [Railway](https://railway.app/), or [Fly.io](https://fly.io/) for free hosting of Python/Flask apps.
+- GitHub Pages **cannot** host Python/Flask backends (static only).
 
-### Step 1: Prepare for Deployment
-Ensure all tests pass and the application runs locally.
+### Static UI (GitHub Pages)
+- You can host the static UI (HTML/CSS/JS) on GitHub Pages, but backend features (search, LLM) will not work.
+- To do this, copy `templates/index.html` and the `static/` folder to a `docs/` directory, commit, and enable Pages in repo settings.
+- The provided `docs/index.html` and `docs/styles.css` are ready for Pages.
 
-### Step 2: Deploy to a Server
-Use a platform like AWS, Heroku, or DigitalOcean to deploy the Flask app.
+---
 
-### Step 3: Configure Environment Variables
-Set up environment variables on the server for production.
+## Step-by-Step: GitHub Pages Static UI
+1. Ensure `docs/index.html` and `docs/styles.css` exist (see this repo).
+2. Commit and push to your repo.
+3. In GitHub, go to **Settings > Pages** and set source to `docs/` folder.
+4. Visit your Pages URL (see repo settings).
 
-## Troubleshooting
+---
 
-### Common Issues
-1. **Dependency Errors**: Ensure all packages are installed using `pip install -r requirements.txt`.
-2. **API Key Missing**: Add your OpenAI API key to `config.py`.
-3. **Server Not Starting**: Check for syntax errors or missing files.
+## Step-by-Step: Deploy Flask Backend (Render Example)
+1. Fork this repo to your GitHub account.
+2. Create a new web service on [Render](https://render.com/):
+   - Connect your repo.
+   - Set build command: `pip install -r requirements.txt`
+   - Set start command: `python src/app.py`
+   - Add environment variable: `OPENAI_API_KEY=sk-...`
+3. Deploy and visit your Render URL.
 
-### Debugging Tips
-- Use `print` statements or logging for debugging.
-- Check the terminal output for error messages.
+---
 
 ## Contributing
-Feel free to fork the repository and submit pull requests for improvements.
+PRs welcome! Please open issues for bugs or feature requests.
+
+---
 
 ## License
-This project is licensed under the MIT License.
+MIT

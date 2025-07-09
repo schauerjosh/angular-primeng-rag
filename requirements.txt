@@ -1,0 +1,15 @@
+# Core dependencies
+flask
+openai
+chromadb
+tiktoken
+PyPDF2
+
+# For local development and debugging
+python-dotenv
+
+# Optional: for PDF parsing robustness
+pdfminer.six
+
+# Optional: for markdown rendering in Flask (if used)
+markdown2
